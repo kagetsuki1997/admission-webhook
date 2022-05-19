@@ -1,0 +1,9 @@
+---
+apiVersion: app.demo/v1alpha1
+kind: Doge
+metadata:
+  name: doge1
+spec:
+  image: null
+  number: 87
+  dogeStatus: Normal

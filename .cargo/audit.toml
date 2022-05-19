@@ -1,0 +1,9 @@
+[advisories]
+ignore = [
+  # Potential segfault in the time crate
+  # https://github.com/time-rs/time/issues/293
+  "RUSTSEC-2020-0071",
+  # Potential segfault in the chrono crate
+  # https://github.com/chronotope/chrono/issues/499
+  "RUSTSEC-2020-0159",
+]

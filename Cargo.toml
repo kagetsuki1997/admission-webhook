@@ -1,0 +1,51 @@
+[package]
+name = "admission-webhook"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "admission-webhook"
+path = "src/bin/main.rs"
+doc = false
+
+[dependencies]
+opentelemetry = { version = "0.17", default-features = false, features = ["rt-tokio"] }
+opentelemetry-otlp = { version = "0.10", features = ["trace"] }
+opentelemetry-semantic-conventions = "0.9"
+tracing = "0.1"
+tracing-opentelemetry = "0.17"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+json-patch = "0.2"
+schemars = { version = "0.8", features = ["chrono", "indexmap", "uuid", "url", "bytes"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+async-trait = "0.1"
+tokio = { version = "1", features = ["rt-multi-thread", "signal", "sync", "time"] }
+
+axum = { version = "0.5", features = ["headers"] }
+axum-server = { version = "0.3", features = ["tls-rustls"] }
+hyper = "0.14"
+hyper_serde = "0.13"
+tower = { version = "0.4", features = ["timeout"] }
+tower-http = { version = "0.3", features = ["trace", "compression-full"] }
+
+bb8 = "0.8"
+
+k8s-openapi = { version = "0.13", default-features = false, features = ["v1_21"] }
+kube = { version = "0.65", default-features = false, features = ["admission", "client", "derive", "runtime"] }
+
+clap = { version = "3", features = ["derive", "env"] }
+clap_complete = "3"
+indexmap = { version = "1", features = ["serde-1"] }
+mimalloc = "0.1"
+mime = "0.3"
+snafu = { version = "0.7", default-features = false, features = ["std", "futures"] }
+url = { version = "2", features = ["serde"] }
+
+[dependencies.lifecycle-manager]
+git = "ssh://git@github.com/fstnetwork/rust-common-libs"
+rev = "lifecycle-manager-v0.1.0"
+package = "lifecycle-manager"
+version = "0.1.0"

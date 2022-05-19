@@ -1,0 +1,9 @@
+apiVersion: v2
+name: admission-webhook
+description: A Helm chart for Admission Webhook
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+maintainers:
+  - name: fstnetwork
+    email: dev@fstk.io

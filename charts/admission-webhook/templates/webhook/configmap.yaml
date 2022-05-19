@@ -1,0 +1,19 @@
+{{- if .Values.webhook.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "admission-webhook.webhook.fullname" . }}
+  labels:
+    {{- include "admission-webhook.webhook.labels" . | nindent 4 }}
+data:
+  {{/* webhook API */}}
+  ADMISSION_WEBHOOK_API_ADDRESS: 0.0.0.0
+  ADMISSION_WEBHOOK_API_PORT: {{ include "admission-webhook.webhook.httpPort" . | quote }}
+  {{/* certificate file */}}
+  ADMISSION_WEBHOOK_TLS_CERT: /certs/tls.crt
+  ADMISSION_WEBHOOK_TLS_KEY: /certs/tls.key
+  {{/* telemetry */}} 
+  {{- with .Values.telemetryOtlpEndpoint }}
+  ADMISSION_WEBHOOK_TELEMETRY_OTLP_ENDPOINT: {{ . }}
+  {{- end }}
+{{- end }}

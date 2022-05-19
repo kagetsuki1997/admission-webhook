@@ -1,0 +1,11 @@
+
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source."ssh://git@github.com/fstnetwork/rust-common-libs"]
+git = "ssh://git@github.com/fstnetwork/rust-common-libs"
+rev = "lifecycle-manager-v0.1.0"
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"

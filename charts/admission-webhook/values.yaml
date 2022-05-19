@@ -1,0 +1,61 @@
+nameOverride: ""
+fullnameOverride: ""
+
+clusterDomain: cluster.local
+logLevel: debug,h2=info,hyper::client=info,hyper::proto=info,kube_client::client=info,reqwest::connect=info,tower::buffer=info
+
+certificate:
+  name: admission-webhook-crt
+  secretName: admission-webhook-crt
+  issuerName: selfsigned
+  createIssuer: true
+
+telemetryOtlpEndpoint: ""
+
+webhook:
+  enabled: true
+
+  replicaCount: 1
+
+  # pod template
+  podAnnotations: {}
+  podLabels: {}
+  affinity: {}
+  imagePullSecrets: []
+  nodeSelector: {}
+  priorityClassName: ""
+  podSecurityContext:
+    runAsNonRoot: true
+  tolerations: []
+
+  # container
+  image:
+    registry: localhost:5001
+    repository: admission-webhook
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "debian"
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - ALL
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  # service
+  service:
+    annotations: {}
+    type: ClusterIP
+
+  # service account
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    imagePullSecrets: []
